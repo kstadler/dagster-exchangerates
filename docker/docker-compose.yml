@@ -22,8 +22,8 @@ services:
   # its own port, and have its own entry in the workspace.yaml file that's loaded by dagit.
   docker_exchangerates_pipelines:
     build:
-      context: .
-      dockerfile: ./Dockerfile_pipelines
+      context: ..
+      dockerfile: docker/Dockerfile_pipelines
     container_name: docker_exchangerates_pipelines
     ports:
       - "4000:4000"
@@ -40,8 +40,8 @@ services:
   # a queue and later dequeued and launched by dagster-daemon.
   docker_exchangerates_dagit:
     build:
-      context: .
-      dockerfile: ./Dockerfile_dagster
+      context: ..
+      dockerfile: docker/Dockerfile_dagster
     entrypoint:
       - dagit
       - -h
@@ -49,7 +49,7 @@ services:
       - -p
       - "3000"
       - -w
-      - workspace_docker.yaml
+      - workspace.yaml
     container_name: docker_exchangerates_dagit
     expose:
       - "3000"
@@ -69,8 +69,8 @@ services:
   # off of the queue and launching them, as well as creating runs from schedules or sensors.
   docker_exchangerates_daemon:
     build:
-      context: .
-      dockerfile: ./Dockerfile_dagster
+      context: ..
+      dockerfile: docker/Dockerfile_dagster
     entrypoint:
       - dagster-daemon
       - run
