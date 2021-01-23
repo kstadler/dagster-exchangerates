@@ -3,7 +3,7 @@ from dagster import solid, Output, Field, OutputDefinition, InputDefinition
 from pandas import DataFrame
 import sqlite3
 
-from .dagster_types import ExchangeRateDataFrame
+from definitions.exchangerates.dagster_types import ExchangeRateDataFrame
 
 
 @solid(config_schema={"base_currency": Field(str, is_required=False, default_value='EUR'),
@@ -60,7 +60,7 @@ def load(context, df: DataFrame):
                          from exchangerates e
                          where e.id = s.id);"""
 
-    conn = sqlite3.connect('../exchangerates.sqlite')
+    conn = sqlite3.connect('database/exchangerates.sqlite')
     conn.execute(sql_create_table)
     df.to_sql('stage', conn, if_exists='replace')
     conn.execute(sql_update)

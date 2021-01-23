@@ -1,7 +1,7 @@
 from dagster import repository
 
-from .pipelines import exchangerates_pipline
-from .partitions import year_partition_set
+from definitions.exchangerates.pipelines import exchangerates_pipline
+from definitions.exchangerates.partitions import year_partition_set
 
 
 @repository

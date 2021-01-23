@@ -1,6 +1,6 @@
 from dagster import pipeline
 
-from .solids import extract, load, transform
+from definitions.exchangerates.solids import extract, load, transform
 
 
 @pipeline

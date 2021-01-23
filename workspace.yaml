@@ -1,2 +1,4 @@
 load_from:
-  - python_module: definitions.repositories
+  - python_file:
+      relative_path: definitions/repositories.py
+      working_directory: .

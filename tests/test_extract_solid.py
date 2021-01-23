@@ -2,7 +2,7 @@ from datetime import date
 
 from dagster import execute_solid
 
-from definitions.solids import extract
+from definitions.exchangerates.solids import extract
 
 
 def is_key_in_dict(dict, key):
