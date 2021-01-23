@@ -60,7 +60,7 @@ def load(context, df: DataFrame):
                          from exchangerates e
                          where e.id = s.id);"""
 
-    conn = sqlite3.connect('database/exchangerates.sqlite')
+    conn = sqlite3.connect('exchangerates.sqlite')
     conn.execute(sql_create_table)
     df.to_sql('stage', conn, if_exists='replace')
     conn.execute(sql_update)
