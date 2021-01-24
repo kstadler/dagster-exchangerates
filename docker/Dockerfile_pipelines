@@ -1,13 +1,16 @@
-FROM python:3.7-slim
+ARG BASE_IMAGE
+FROM "${BASE_IMAGE}"
 
 # Checkout and install dagster libraries needed to run the gRPC server
 # exposing your repository to dagit and dagster-daemon, and to load the DagsterInstance
 
+ARG DAGSTER_VERSION
+
 RUN pip install \
-    dagster \
-    dagster-postgres \
-    dagster-docker \
-    dagster-pandas \
+    dagster==${DAGSTER_VERSION} \
+    dagster-postgres==${DAGSTER_VERSION} \
+    dagster-docker==${DAGSTER_VERSION} \
+    dagster-pandas==${DAGSTER_VERSION} \
     requests \
     pandas
 

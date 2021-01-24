@@ -7,11 +7,13 @@ Current features:
 - stores exchange rates in a sqlite database (please note that there are gaps for days without trade)
 - year based partitions for use with CLI and dagit
 - daily scheduler
-- dagster type for the intermediate DataFrame with EventMetaData 
+- Dagster type for the intermediate DataFrame with EventMetaData 
 - run on console using preconfigured Python API example
 - run using dagit
 - deploy using Docker Compose
 - deploy on Kubernetes using Helm
+- Dagster version is pinned statically in various places (currently to v0.10.1)
+
 
 This project uses pipenv for dependency management.
 
@@ -38,8 +40,8 @@ To deploy on Kubernetes using Helm do the following:
 - deploy your usercode to docker using kubernetes/Dockerfile
   - adjust parameters in file kubernetes/versions 
   - run kubernetes/build_and_upload_user_image.py
-- adjust parameters for Helm in kubernetes/values.yaml
+- adjust parameters for Helm in kubernetes/values.yaml.
 - install the Helm chart using the following commands:
   - `helm repo add dagster https://dagster-io.github.io/helm`
-  - `helm install dagster dagster/dagster -f ./values.yaml --set runLauncher.type=K8sRunLauncher --set userDeployments.enabled=true --set celery.enabled=false --set rabbitmq.enabled=false`
+  - `helm install dagster dagster/dagster -f ./values.yaml`
 - forward the dagit port to http://localhost:8080 by running kubernetes/dagit.sh (Linux) or  kubernetes/dagit.bat (Windows)

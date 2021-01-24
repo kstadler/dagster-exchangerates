@@ -22,7 +22,7 @@ dagit:
   # REQUIRED: Dagit image repository and tag to deploy
   image:
     repository: "dagster/k8s-dagit-example"
-    tag: "latest"
+    tag: "0.10.1"
     pullPolicy: Always
 
   service:
@@ -169,7 +169,7 @@ userDeployments:
     - name: "k8s-exchangerates-example-user-code-1"
       image:
         repository: "airblaster/dagster_exchangerates"
-        tag: latest
+        tag: 0.10.1
         # Change with caution! If you're using a fixed tag for pipeline run images, changing the
         # image pull policy to anything other than "Always" will use a cached/stale image, which is
         # almost certainly not what you want.
@@ -262,7 +262,7 @@ userDeployments:
 pipelineRun:
   image:
     repository: "dagster/k8s-example"
-    tag: "latest"
+    tag: "0.10.1"
     pullPolicy: Always
 
   # Additional environment variables to set.
@@ -296,7 +296,7 @@ scheduler:
       # but does not need access to user code.
       image:
         repository: "dagster/k8s-dagit"
-        tag: "latest"
+        tag: "0.10.1"
         pullPolicy: Always
 
       # K8s Namespace for K8s CronJob(s) and launched K8s Job(s).
@@ -377,7 +377,7 @@ runLauncher:
       # The Celery workers can be deployed with a fixed image (no user code included)
       image:
         repository: "dagster/k8s-celery-worker"
-        tag: "latest"
+        tag: "0.10.1"
         pullPolicy: Always
 
       # Support overriding the name prefix of Celery worker pods
@@ -669,7 +669,7 @@ dagsterDaemon:
 
   image:
     repository: "dagster/k8s-dagit"
-    tag: "latest"
+    tag: "0.10.1"
     pullPolicy: Always
 
   queuedRunCoordinator:

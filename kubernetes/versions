@@ -1,3 +1,3 @@
 DAGSTER_VERSION=0.10.1
-BASE_IMAGE=python:3.7.8-slim
-USERCODE_DOCKER_TAG=airblaster/dagster_exchangerates
+BASE_IMAGE=python:3.8.7-slim
+USERCODE_DOCKER_REPO=airblaster/dagster_exchangerates

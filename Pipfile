@@ -4,11 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-dagster = "*"
-dagit = "*"
+dagster = "0.10.1"
+dagit = "0.10.1"
+dagster-pandas = "0.10.1"
 requests = "*"
 pandas = "*"
-dagster-pandas = "*"
 
 
 [dev-packages]

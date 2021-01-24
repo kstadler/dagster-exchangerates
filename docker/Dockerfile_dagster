@@ -1,14 +1,17 @@
 # Dagster libraries to run both dagit and the dagster-daemon. Does not
 # need to have access to any pipeline code.
 
-FROM python:3.7-slim
+ARG BASE_IMAGE
+FROM "${BASE_IMAGE}"
+
+ARG DAGSTER_VERSION
 
 RUN pip install \
-    dagster \
-    dagster-graphql \
-    dagit \
-    dagster-postgres \
-    dagster-docker
+    dagster==${DAGSTER_VERSION} \
+    dagster-graphql==${DAGSTER_VERSION} \
+    dagit==${DAGSTER_VERSION} \
+    dagster-postgres==${DAGSTER_VERSION} \
+    dagster-docker==${DAGSTER_VERSION}
 
 # Set $DAGSTER_HOME and copy dagster instance and workspace YAML there
 ENV DAGSTER_HOME=/opt/dagster/dagster_home/
