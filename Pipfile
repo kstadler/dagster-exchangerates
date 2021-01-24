@@ -7,11 +7,14 @@ name = "pypi"
 dagster = "*"
 dagit = "*"
 requests = "*"
-pytest = "*"
 pandas = "*"
 dagster-pandas = "*"
 
+
 [dev-packages]
+python-dotenv = "*"
+docker = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.9"

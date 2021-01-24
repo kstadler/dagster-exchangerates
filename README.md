@@ -18,7 +18,8 @@ This project uses pipenv for dependency management.
 To run the project locally in the console using the Python API example use the follwoing commands:
 ```shell
 pipenv install
-pipenv run python example_run_without_docker.py
+cd local
+pipenv run python local_example_run.py
 ```
 The parameters date_from and date_to are set statically in this example.
 
@@ -26,6 +27,7 @@ To run the dagit GUI for this project just run the following:
 
 ```shell
 pipenv install
+cd local
 pipenv run dagit
 ```
 
@@ -33,7 +35,9 @@ To deploy on Kubernetes using Helm do the following:
 - setup your Kubernetes cluster and Helm 
   - this can be done on a local machine for testing purposes
   - on Windows you can setup Docker as a Kubernetes service and install Helm manually or using WSL
-- deploy your usercode to docker using kubernetes/Dockerfile by adjusting parameters in and then running kubernetes/build_and_upload_user_image.sh (Linux) or kubernetes/build_and_upload_user_image.bat (Windows)
+- deploy your usercode to docker using kubernetes/Dockerfile
+  - adjust parameters in file kubernetes/versions 
+  - run kubernetes/build_and_upload_user_image.py
 - adjust parameters for Helm in kubernetes/values.yaml
 - install the Helm chart using the following commands:
   - `helm repo add dagster https://dagster-io.github.io/helm`
