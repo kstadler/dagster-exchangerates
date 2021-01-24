@@ -43,5 +43,5 @@ To deploy on Kubernetes using Helm do the following:
 - adjust parameters for Helm in kubernetes/values.yaml.
 - install the Helm chart using the following commands:
   - `helm repo add dagster https://dagster-io.github.io/helm`
-  - `helm install dagster dagster/dagster -f ./values.yaml`
+  - `helm upgrade --install --atomic dagster dagster/dagster -f ./values.yaml`
 - forward the dagit port to http://localhost:8080 by running kubernetes/dagit.sh (Linux) or  kubernetes/dagit.bat (Windows)
