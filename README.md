@@ -10,7 +10,8 @@ Current features:
 - dagster type for the intermediate DataFrame with EventMetaData 
 - run on console using preconfigured Python API example
 - run using dagit
-- planned: deploy using Docker Compose
+- deploy using Docker Compose
+- deploy on Kubernetes using Helm
 
 This project uses pipenv for dependency management.
 
@@ -28,4 +29,13 @@ pipenv install
 pipenv run dagit
 ```
 
-This project is currently work in progress, support for Docker Compose is unfinished.
+To deploy on Kubernetes using Helm do the following:
+- setup your Kubernetes cluster and Helm 
+  - this can be done on a local machine for testing purposes
+  - on Windows you can setup Docker as a Kubernetes service and install Helm manually or using WSL
+- deploy your usercode to docker using kubernetes/Dockerfile by adjusting parameters in and then running kubernetes/build_and_upload_user_image.sh (Linux) or kubernetes/build_and_upload_user_image.bat (Windows)
+- adjust parameters for Helm in kubernetes/values.yaml
+- install the Helm chart using the following commands:
+  - `helm repo add dagster https://dagster-io.github.io/helm`
+  - `helm install dagster dagster/dagster -f ./values.yaml --set runLauncher.type=K8sRunLauncher --set userDeployments.enabled=true --set celery.enabled=false --set rabbitmq.enabled=false`
+- forward the dagit port to http://localhost:8080 by running kubernetes/dagit.sh (Linux) or  kubernetes/dagit.bat (Windows)
