@@ -1,15 +1,8 @@
-from datetime import datetime, date
+from datetime import date
 
 from dagster import PartitionSetDefinition
 
-
-def get_year_partitions():
-    current_year = datetime.now().year
-
-    partitions = []
-    for year in range(current_year, 1999, -1):
-        partitions.append(str(year))
-    return partitions
+from definitions.common.partitions import get_year_partitions
 
 
 def run_config_for_year_partition(partition):
