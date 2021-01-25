@@ -6,12 +6,18 @@ FROM "${BASE_IMAGE}"
 
 ARG DAGSTER_VERSION
 
+# Use Virtual Environment
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+
 RUN pip install \
     dagster==${DAGSTER_VERSION} \
     dagster-graphql==${DAGSTER_VERSION} \
-    dagit==${DAGSTER_VERSION} \
     dagster-postgres==${DAGSTER_VERSION} \
-    dagster-docker==${DAGSTER_VERSION}
+    dagster-docker==${DAGSTER_VERSION} \
+    dagit==${DAGSTER_VERSION}
 
 # Set $DAGSTER_HOME and copy dagster instance and workspace YAML there
 ENV DAGSTER_HOME=/opt/dagster/dagster_home/

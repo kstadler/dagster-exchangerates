@@ -19,9 +19,10 @@ def run_config_for_year_partition(partition):
     return {"solids": {"extract": {"config": {"date_from": date_from, "date_to": date_to}}}}
 
 
-year_partition_set = PartitionSetDefinition(
-    name="year_partition_set",
-    pipeline_name="exchangerates_pipline",
-    partition_fn=get_year_partitions,
-    run_config_fn_for_partition=run_config_for_year_partition,
-)
+def load_exchangerates_year_partition_set():
+    return PartitionSetDefinition(
+        name="exchangerates_year_partition_set",
+        pipeline_name="exchangerates_pipline",
+        partition_fn=get_year_partitions,
+        run_config_fn_for_partition=run_config_for_year_partition,
+    )

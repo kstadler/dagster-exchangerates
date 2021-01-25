@@ -1,18 +1,28 @@
 ARG BASE_IMAGE
 FROM "${BASE_IMAGE}"
 
+ARG DAGSTER_VERSION
+
 # Checkout and install dagster libraries needed to run the gRPC server
 # exposing your repository to dagit and dagster-daemon, and to load the DagsterInstance
 
-ARG DAGSTER_VERSION
+# Use Virtual Environment
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
+
+# Install dependencies that are not in Pipfile
 RUN pip install \
     dagster==${DAGSTER_VERSION} \
     dagster-postgres==${DAGSTER_VERSION} \
-    dagster-docker==${DAGSTER_VERSION} \
-    dagster-pandas==${DAGSTER_VERSION} \
-    requests \
-    pandas
+    dagster-docker==${DAGSTER_VERSION}
+
+# Install dependencies that are in Pipfile
+RUN pip install pipenv
+COPY Pipfile* /tmp/
+RUN cd /tmp && pipenv lock --keep-outdated --requirements > requirements.txt
+RUN pip install -r /tmp/requirements.txt
 
 # Set $DAGSTER_HOME and copy dagster instance there
 

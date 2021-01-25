@@ -23,7 +23,7 @@ services:
   docker_exchangerates_pipelines:
     build:
       context: ..
-      dockerfile: docker/Dockerfile_pipelines
+      dockerfile: docker/pipelines.Dockerfile
       args:
         - DAGSTER_VERSION=0.10.1
         - BASE_IMAGE=python:3.8.7-slim
@@ -44,7 +44,7 @@ services:
   docker_exchangerates_dagit:
     build:
       context: ..
-      dockerfile: docker/Dockerfile_dagster
+      dockerfile: docker/dagster.Dockerfile
       args:
         - DAGSTER_VERSION=0.10.1
         - BASE_IMAGE=python:3.8.7-slim
@@ -76,7 +76,7 @@ services:
   docker_exchangerates_daemon:
     build:
       context: ..
-      dockerfile: docker/Dockerfile_dagster
+      dockerfile: docker/dagster.Dockerfile
       args:
         - DAGSTER_VERSION=0.10.1
         - BASE_IMAGE=python:3.8.7-slim
