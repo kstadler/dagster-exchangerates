@@ -185,6 +185,7 @@ userDeployments:
       dagsterApiGrpcArgs:
         - "-f"
         - "definitions/repositories.py"
+        - "--lazy-load-user-code"
       port: 3030
 
       # Additional environment variables to set.
