@@ -21,7 +21,6 @@ This project uses pipenv for dependency management.
 To run the project locally in the console using the Python API example use the follwoing commands:
 ```shell
 pipenv install --dev
-cd local
 pipenv run python local_example_run.py
 ```
 The parameters date_from and date_to are set statically in this example.
@@ -30,7 +29,6 @@ To run the dagit GUI for this project just run the following:
 
 ```shell
 pipenv install --dev
-cd local
 pipenv run dagit
 ```
 
