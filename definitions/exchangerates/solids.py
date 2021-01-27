@@ -6,14 +6,20 @@ import sqlite3
 from definitions.exchangerates.dagster_types import ExchangeRateDataFrame
 
 
-@solid(config_schema={"base_currency": Field(str, is_required=False, default_value='EUR'),
-                      "date_from": str, "date_to": str})
+@solid(
+    config_schema={
+        "base_currency": Field(str, is_required=False, default_value="EUR"),
+        "date_from": str,
+        "date_to": str,
+    }
+)
 def extract(context):
     result = requests.get(
         f"https://api.exchangeratesapi.io/history?"
         f"&start_at={context.solid_config['date_from']}"
         f"&end_at={context.solid_config['date_to']}"
-        f"&base={context.solid_config['base_currency']}")
+        f"&base={context.solid_config['base_currency']}"
+    )
     if result.status_code != 200:
         raise ValueError("API didn't return valid result")
     return result.json()
@@ -22,21 +28,21 @@ def extract(context):
 @solid(output_defs=[OutputDefinition(ExchangeRateDataFrame)])
 def transform(context, currency_json) -> DataFrame:
     data = []
-    for day in currency_json['rates']:
-        for currency in currency_json['rates'][day]:
+    for day in currency_json["rates"]:
+        for currency in currency_json["rates"][day]:
             data.append(
                 {
-                    'id': f"{day}-{currency}",
-                    'day': day,
-                    'currency': currency,
-                    'rate': currency_json['rates'][day][currency]
+                    "id": f"{day}-{currency}",
+                    "day": day,
+                    "currency": currency,
+                    "rate": currency_json["rates"][day][currency],
                 }
             )
 
     yield Output(DataFrame(data))
 
 
-@solid(input_defs=[InputDefinition(name='df', dagster_type=ExchangeRateDataFrame)])
+@solid(input_defs=[InputDefinition(name="df", dagster_type=ExchangeRateDataFrame)])
 def load(context, df: DataFrame):
     sql_create_table = """create table if not exists exchangerates (
                         id text primary key,
@@ -60,9 +66,9 @@ def load(context, df: DataFrame):
                          from exchangerates e
                          where e.id = s.id);"""
 
-    conn = sqlite3.connect('exchangerates.sqlite')
+    conn = sqlite3.connect("exchangerates.sqlite")
     conn.execute(sql_create_table)
-    df.to_sql('stage', conn, if_exists='replace')
+    df.to_sql("stage", conn, if_exists="replace")
     conn.execute(sql_update)
     conn.execute(sql_insert)
     conn.commit()

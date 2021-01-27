@@ -38,5 +38,5 @@ ExchangeRateDataFrame = create_dagster_pandas_dataframe_type(
         PandasColumn.string_column("currency"),
         PandasColumn.numeric_column("rate"),
     ],
-    event_metadata_fn=compute_exchange_rate_dataframe_summary_statistics
+    event_metadata_fn=compute_exchange_rate_dataframe_summary_statistics,
 )

@@ -14,6 +14,10 @@ def load_exchangerates_schedule():
         year = day.year
         date_from = date(year=year, month=1, day=1).isoformat()
         date_to = date(year=year, month=12, day=31).isoformat()
-        return {"solids": {"extract": {"config": {"date_from": date_from, "date_to": date_to}}}}
+        return {
+            "solids": {
+                "extract": {"config": {"date_from": date_from, "date_to": date_to}}
+            }
+        }
 
     return exchangerates_schedule

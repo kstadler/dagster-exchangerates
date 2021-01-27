@@ -14,7 +14,5 @@ def exchangerates_repo():
         "partition_sets": {
             "exchangerates_year_partition_set": load_exchangerates_year_partition_set
         },
-        "schedules": {
-            "exchangerates_schedule": load_exchangerates_schedule
-        },
+        "schedules": {"exchangerates_schedule": load_exchangerates_schedule},
     }
