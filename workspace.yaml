@@ -1,4 +1,4 @@
 load_from:
   - python_file:
-      relative_path: ../definitions/repositories.py
-      working_directory: ..
+      relative_path: ./definitions/repositories.py
+      working_directory: .
