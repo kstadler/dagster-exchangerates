@@ -1,7 +1,9 @@
 import requests
-from dagster import solid, Output, Field, OutputDefinition, InputDefinition
+from dagster import solid, Output, Field, OutputDefinition, InputDefinition, Nothing
+from dagster.utils import script_relative_path
 from pandas import DataFrame
 import sqlite3
+import dagstermill as dm
 
 from definitions.exchangerates.dagster_types import ExchangeRateDataFrame
 
@@ -43,7 +45,7 @@ def transform(context, currency_json) -> DataFrame:
 
 
 @solid(input_defs=[InputDefinition(name="df", dagster_type=ExchangeRateDataFrame)])
-def load(context, df: DataFrame):
+def load(context, df: DataFrame) -> Nothing:
     sql_create_table = """create table if not exists exchangerates (
                         id text primary key,
                         day text,
@@ -72,3 +74,13 @@ def load(context, df: DataFrame):
     conn.execute(sql_update)
     conn.execute(sql_insert)
     conn.commit()
+    conn.close()
+
+
+visualize = dm.define_dagstermill_solid(
+    "visualize",
+    script_relative_path("visualization.ipynb"),
+    config_schema=Field(str, default_value='exchangerates.sqlite', is_required=False),
+    input_defs=[InputDefinition('start', Nothing)],
+    required_resource_keys={'file_manager'},
+)
