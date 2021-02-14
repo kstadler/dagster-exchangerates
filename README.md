@@ -13,7 +13,7 @@ Current features:
 - deploy using Docker Compose
 - deploy on Kubernetes using Helm
 - user code dependencies are defined in Pipenv Pipfile and copied to Docker for Docker Compose and Kubernetes deployment 
-- Dagster version is pinned statically in various places (currently to v0.10.1)
+- Dagster version is pinned statically in various places (currently to v0.10.5)
 
 
 This project uses pipenv for dependency management.
@@ -42,5 +42,5 @@ To deploy on Kubernetes using Helm do the following:
 - adjust parameters for Helm in kubernetes/values.yaml.
 - install the Helm chart using the following commands:
   - `helm repo add dagster https://dagster-io.github.io/helm`
-  - `helm upgrade --install --atomic --version 0.10.1 dagster-exchangerates dagster/dagster -f ./values.yaml`
+  - `helm upgrade --install --atomic --version 0.10.5 dagster-exchangerates dagster/dagster -f ./values.yaml`
 - forward the dagit port to http://localhost:8080 by running kubernetes/dagit.sh (Linux) or  kubernetes/dagit.bat (Windows)

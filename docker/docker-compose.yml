@@ -25,7 +25,7 @@ services:
       context: ..
       dockerfile: docker/pipelines.Dockerfile
       args:
-        - DAGSTER_VERSION=0.10.1
+        - DAGSTER_VERSION=0.10.5
         - BASE_IMAGE=python:3.8.7-slim
     container_name: docker_exchangerates_pipelines
     ports:
@@ -46,7 +46,7 @@ services:
       context: ..
       dockerfile: docker/dagster.Dockerfile
       args:
-        - DAGSTER_VERSION=0.10.1
+        - DAGSTER_VERSION=0.10.5
         - BASE_IMAGE=python:3.8.7-slim
     entrypoint:
       - dagit
@@ -78,7 +78,7 @@ services:
       context: ..
       dockerfile: docker/dagster.Dockerfile
       args:
-        - DAGSTER_VERSION=0.10.1
+        - DAGSTER_VERSION=0.10.5
         - BASE_IMAGE=python:3.8.7-slim
     entrypoint:
       - dagster-daemon

@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-dagster = "==0.10.1"
-dagster-pandas = "==0.10.1"
+dagster = "==0.10.5"
+dagster-pandas = "==0.10.5"
 requests = "*"
 pandas = "*"
 
 [dev-packages]
-dagit = "==0.10.1"
+dagit = "==0.10.5"
 python-dotenv = "*"
 docker = "*"
 pytest = "*"
